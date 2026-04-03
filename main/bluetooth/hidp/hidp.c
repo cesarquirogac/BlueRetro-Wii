@@ -28,7 +28,7 @@ static const struct bt_name_type bt_name_type[] = {
     {"DualSense Wireless Controller", BT_PS, BT_PS5_DS, 0},
     {"Wireless Controller", BT_PS, BT_SUBTYPE_DEFAULT, 0},
     {"Nintendo RVL-CNT-01-UC", BT_WII, BT_WIIU_PRO, 0}, /* Must be before WII */
-    {"Nintendo RVL-CNT-01", BT_WII, BT_SUBTYPE_DEFAULT, 0},
+    //{"Nintendo RVL-CNT-01", BT_WII, BT_SUBTYPE_DEFAULT, 0},
     {"Pro Controller", BT_SW, BT_SUBTYPE_DEFAULT, 0},
     {"Joy-Con (L)", BT_SW, BT_SW_LEFT_JOYCON, 0},
     {"Joy-Con (R)", BT_SW, BT_SW_RIGHT_JOYCON, 0},
