@@ -293,7 +293,7 @@ static void wired_port_hdl(void) {
         int32_t prev_idx = device->ids.out_idx;
 #endif
         while (idx < hw_config.port_cnt &&
-            config.out_cfg[idx].dev_mode == DEV_NONE) {
+            config.out_cfg[idx].dev_mode == DEV_BLOCK) {
             idx++;
         }
 
