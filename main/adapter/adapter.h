@@ -92,6 +92,7 @@ enum {
     PARALLEL_2P_OD,
     SEA_BOARD,
     WIRED_MAX,
+    REAL_WII,
 };
 
 /* Report type ID */
@@ -340,6 +341,7 @@ enum {
     DEV_PAD_ALT,
     DEV_KB,
     DEV_MOUSE,
+    DEV_NONE = 255,
 };
 
 /* Acc mode */

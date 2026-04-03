@@ -292,6 +292,15 @@ static void wired_port_hdl(void) {
 #ifdef CONFIG_BLUERETRO_HW2
         int32_t prev_idx = device->ids.out_idx;
 #endif
+        while (idx < hw_config.port_cnt &&
+            config.out_cfg[idx].dev_mode == DEV_NONE) {
+            idx++;
+        }
+
+        if (idx >= hw_config.port_cnt) {
+            break;
+        }
+        
         device->ids.out_idx = idx;
         if ((hw_config.hotplug && bt_ready) || !hw_config.hotplug) {
             port_mask |= BIT(idx) | adapter_get_out_mask(idx);
