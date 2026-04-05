@@ -722,7 +722,7 @@ void nsi_port_cfg(uint16_t mask) {
 
     for (uint32_t i = 0; i < ARRAY_SIZE(gpio_pin); i++) {
 
-        if (mask & 0x1) {
+        if ((mask & 0x1) && config.out_cfg[i].dev_mode != DEV_BLOCK) {
             PIN_FUNC_SELECT(GPIO_PIN_MUX_REG_IRAM[gpio_pin[i]], PIN_FUNC_GPIO);
             /* Bidirectional open-drain */
             gpio_set_direction_iram(gpio_pin[i], GPIO_MODE_INPUT_OUTPUT_OD);

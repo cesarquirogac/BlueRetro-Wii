@@ -272,6 +272,13 @@ static void wired_port_hdl(void) {
     uint16_t port_mask = 0;
     uint8_t err_led_set = 0;
 
+    uint16_t blocked_mask = 0;
+    for (uint32_t k = 0; k < hw_config.port_cnt; k++) {
+        if (config.out_cfg[k].dev_mode == DEV_BLOCK) {
+            blocked_mask |= BIT(k);
+        }
+    }
+
     for (int32_t i = 0, j = 0, idx = 0; i < BT_MAX_DEV; i++) {
         struct bt_dev *device = NULL;
         uint8_t bt_ready = 0;
@@ -303,7 +310,9 @@ static void wired_port_hdl(void) {
         
         device->ids.out_idx = idx;
         if ((hw_config.hotplug && bt_ready) || !hw_config.hotplug) {
-            port_mask |= BIT(idx) | adapter_get_out_mask(idx);
+            uint16_t tmp_mask = BIT(idx) | adapter_get_out_mask(idx);
+            tmp_mask &= ~blocked_mask;
+            port_mask |= tmp_mask;
         }
         idx++;
 
