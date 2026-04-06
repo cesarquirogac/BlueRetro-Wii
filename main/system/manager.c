@@ -316,7 +316,6 @@ static void wired_port_hdl(void) {
         }
         idx++;
 
-
         if (device->ids.out_idx < hw_config.port_cnt) {
             if (bt_ready) {
                 set_port_led(device->ids.out_idx, 1);
