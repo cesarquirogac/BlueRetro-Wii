@@ -730,8 +730,22 @@ void nsi_port_cfg(uint16_t mask) {
             gpio_matrix_in(gpio_pin[i], RMT_SIG_IN0_IDX + rmt_ch[i][system], 0);
         }
         else {
-            gpio_reset_iram(gpio_pin[i]);
-            gpio_matrix_in(GPIO_MATRIX_CONST_ONE_INPUT, RMT_SIG_IN0_IDX + rmt_ch[i][system], 0);
+             if (config.out_cfg[i].dev_mode == DEV_BLOCK) {
+                gpio_config_t cfg = {
+                    .pin_bit_mask = BIT64(gpio_pin[i]),
+                    .mode = GPIO_MODE_INPUT,
+                    .pull_up_en = false,
+                    .pull_down_en = false,
+                    .intr_type = GPIO_INTR_DISABLE,
+                };
+                gpio_config_iram(&cfg);
+                gpio_matrix_out(gpio_pin[i], SIG_GPIO_OUT_IDX, 0, 0);
+                gpio_matrix_in(GPIO_MATRIX_CONST_ONE_INPUT, RMT_SIG_IN0_IDX + rmt_ch[i][system], 0);
+            }
+            else {
+                gpio_reset_iram(gpio_pin[i]);
+                gpio_matrix_in(GPIO_MATRIX_CONST_ONE_INPUT, RMT_SIG_IN0_IDX + rmt_ch[i][system], 0);
+            }
         }
         mask >>= 1;
     }
