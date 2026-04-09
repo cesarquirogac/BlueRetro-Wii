@@ -91,8 +91,8 @@ enum {
     PARALLEL_1P_OD,
     PARALLEL_2P_OD,
     SEA_BOARD,
-    WIRED_MAX,
     REAL_WII,
+    WIRED_MAX,
 };
 
 /* Report type ID */
