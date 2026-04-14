@@ -28,7 +28,7 @@ static const struct bt_name_type bt_name_type[] = {
     {"DualSense Wireless Controller", BT_PS, BT_PS5_DS, 0},
     {"Wireless Controller", BT_PS, BT_SUBTYPE_DEFAULT, 0},
     {"Nintendo RVL-CNT-01-UC", BT_WII, BT_WIIU_PRO, 0}, /* Must be before WII */
-    {"Nintendo RVL-CNT-01", BT_WII, BT_SUBTYPE_DEFAULT, 0},
+    //{"Nintendo RVL-CNT-01", BT_WII, BT_SUBTYPE_DEFAULT, 0},
     {"Pro Controller", BT_SW, BT_SUBTYPE_DEFAULT, 0},
     {"Joy-Con (L)", BT_SW, BT_SW_LEFT_JOYCON, 0},
     {"Joy-Con (R)", BT_SW, BT_SW_RIGHT_JOYCON, 0},
@@ -87,14 +87,12 @@ static const bt_hid_cmd_t bt_hid_feedback_list[BT_TYPE_MAX] = {
 void bt_hid_set_type_flags_from_name(struct bt_dev *device, const char* name) {
     for (uint32_t i = 0; i < sizeof(bt_name_type)/sizeof(*bt_name_type); i++) {
         if (strcasestr(name, bt_name_type[i].name) != NULL) {
-            if (!(wired_adapter.system_id == REAL_WII && !strcmp(bt_name_type[i].name, "Nintendo RVL-CNT-01"))) {
-                struct bt_data *bt_data = &bt_adapter.data[device->ids.id];
+            struct bt_data *bt_data = &bt_adapter.data[device->ids.id];
 
-                bt_type_update(device->ids.id, bt_name_type[i].type, bt_name_type[i].subtype);
-                bt_data->base.flags[PAD] = bt_name_type[i].hid_flags;
-                device->name = &bt_name_type[i];
-                break;
-            }
+            bt_type_update(device->ids.id, bt_name_type[i].type, bt_name_type[i].subtype);
+            bt_data->base.flags[PAD] = bt_name_type[i].hid_flags;
+            device->name = &bt_name_type[i];
+            break;
         }
     }
 }
